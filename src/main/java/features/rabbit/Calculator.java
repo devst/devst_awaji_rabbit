@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class Calculator implements features.Calculator {
 
-	private static final Pattern PATTERN = Pattern.compile("^([0-9]+)(\\+|\\-|\\*|\\/)([0-9]+)$");
+    private static final Pattern PATTERN = Pattern.compile("^([0-9]+)(\\+|\\-|\\*|\\/)([0-9]+)$");
 
     private static final DecimalFormat RESULT_FORMAT = new DecimalFormat("#.###");
 
@@ -22,25 +22,25 @@ public class Calculator implements features.Calculator {
     }
 
     public String executeCalc(String op ,String left, String right) {
-  
-    	BigDecimal leftNum = new BigDecimal(left);
+
+        BigDecimal leftNum = new BigDecimal(left);
         BigDecimal rightNum = new BigDecimal(right);
-        
+
 
         if(BigDecimal.ZERO.equals(leftNum) || BigDecimal.ZERO.equals(rightNum)){
-        	throw new IllegalArgumentException("0を含む式が指定されました");
+            throw new IllegalArgumentException("0を含む式が指定されました");
         }
-        
+
         return RESULT_FORMAT.format(calculate(op, leftNum, rightNum));
     }
 
-	private BigDecimal calculate(String op, BigDecimal leftNum, BigDecimal rightNum) {
-		BigDecimal result;
+    private BigDecimal calculate(String op, BigDecimal leftNum, BigDecimal rightNum) {
+        BigDecimal result;
         if("+".equals(op)) result = leftNum.add(rightNum);
         else if("-".equals(op)) result = leftNum.subtract(rightNum);
         else if("*".equals(op)) result = leftNum.multiply(rightNum);
         else if("/".equals(op)) result = leftNum.divide(rightNum, 3, BigDecimal.ROUND_HALF_UP);
         else throw new IllegalArgumentException("無効な演算子が指定されました");
-		return result;
-	}
+        return result;
+    }
 }
